@@ -1,9 +1,23 @@
-const items = [
-  { id: 1, name: "Yogurt", category: "Dairy" },
-  { id: 2, name: "Pomegranate", category: "Produce" },
-  { id: 3, name: "Lettuce", category: "Produce" },
-  { id: 4, name: "String Cheese", category: "Dairy" },
-  { id: 5, name: "Cookies", category: "Dessert" },
-];
+import React, { useState } from "react";
 
-export default items;
+function Item({ name, category }) {
+  const [inCart, setInCart] = useState(false);
+
+  function toggleCartStatus() {
+    setInCart((prevInCart) => !prevInCart);
+  }
+
+  const buttonClass = inCart ? "remove" : "add";
+
+  return (
+    <li className={inCart ? "in-cart" : ""}>
+      <span>{name}</span>
+      <span className="category">{category}</span>
+      <button className={buttonClass} onClick={toggleCartStatus}>
+        {inCart ? "Remove From Cart" : "Add to Cart"}
+      </button>
+    </li>
+  );
+}
+
+export default Item;
